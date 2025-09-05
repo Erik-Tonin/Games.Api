@@ -1,9 +1,7 @@
-﻿using FIAP.Games.Infra.Context;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FIAP.Games.Domain.Contracts.IRepositories;
+using FIAP.Games.Domain.Entities;
+using FIAP.Games.Infra.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace FIAP.Games.Infra.Repositories
 {

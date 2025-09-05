@@ -1,4 +1,6 @@
-﻿namespace FIAP.Games.Domain.Contracts.IRepositories
+﻿using FIAP.Games.Domain.Entities;
+
+namespace FIAP.Games.Domain.Contracts.IRepositories
 {
     public interface IUserLibraryRepository : IRepositoryBase<UserLibrary>
     {

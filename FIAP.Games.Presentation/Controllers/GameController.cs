@@ -1,5 +1,6 @@
 ﻿using FIAP.Games.Application.Contracts.IApplicationService;
 using FIAP.Games.Application.DTOs;
+using FIAP.Games.Application.Implementations;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

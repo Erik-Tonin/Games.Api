@@ -1,19 +1,25 @@
-﻿using FIAP.Games.Application.Contracts.IApplicationService;
+﻿using Elastic.Clients.Elasticsearch;
+using FIAP.Games.Application.Contracts.IApplicationService;
 using FIAP.Games.Application.DTOs;
 using FIAP.Games.Domain.Contracts.IRepositories;
 using FIAP.Games.Domain.Entities;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 
 namespace FIAP.Games.Application.Implementations
 {
     public class GameApplicationService : ApplicationServiceBase, IGameApplicationService
     {
         private readonly IGameRepository _gameRepository;
+        private readonly IEventRepository _eventRepository;
+        private readonly ElasticsearchClient _elasticClient;
 
-        public GameApplicationService(IGameRepository gameRepository)
+        public GameApplicationService(IGameRepository gameRepository, IEventRepository eventRepository, ElasticsearchClient elasticClient)
         {
             _gameRepository = gameRepository;
+            _eventRepository = eventRepository;
+            _elasticClient = elasticClient;
         }
 
         public async Task<ValidationResult> RegisterGame(GameDTO gameDTO)
@@ -38,6 +44,9 @@ namespace FIAP.Games.Application.Implementations
                 return game.ValidationResult;
 
             await _gameRepository.Add(game);
+            await Event(game);
+            await Elastic(game);
+
             return game.ValidationResult;
         }
 
@@ -107,6 +116,8 @@ namespace FIAP.Games.Application.Implementations
                     gameDTO.ImageURL);
 
                 _gameRepository.Update(game);
+                await Event(game);
+                await Elastic(game);
             }
             else
             {
@@ -119,6 +130,42 @@ namespace FIAP.Games.Application.Implementations
         public async Task<Game> GetByName(string name)
         {
             return await _gameRepository.GetByName(name);
+        }
+
+        public async Task Event(Game game)
+        {
+            var eventEntity = new EventEntity
+            {
+                AggregateId = game.Id,
+                EventType = "GameRegistered",
+                EventData = JsonSerializer.Serialize(new
+                {
+                    game.Id,
+                    game.Name,
+                    game.Category,
+                    game.Censorship,
+                    game.Price,
+                    game.DateRelease
+                }),
+                OccurredOn = DateTime.UtcNow
+            };
+
+            await _eventRepository.Add(eventEntity);
+        }
+
+        public async Task Elastic(Game game)
+        {
+            var elasticGame = new
+            {
+                id = game.Id,
+                name = game.Name,
+                category = game.Category,
+                censorship = game.Censorship,
+                price = game.Price,
+                dateRelease = game.DateRelease,
+            };
+
+            await _elasticClient.IndexAsync(elasticGame, idx => idx.Index("fiap"));
         }
     }
 }

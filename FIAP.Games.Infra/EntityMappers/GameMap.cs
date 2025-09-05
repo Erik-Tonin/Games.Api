@@ -1,4 +1,8 @@
-﻿namespace FIAP.Games.Infra.EntityMappers
+﻿using FIAP.Games.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace FIAP.Games.Infra.EntityMappers
 {
     public class GameMap : IEntityTypeConfiguration<Game>
     {

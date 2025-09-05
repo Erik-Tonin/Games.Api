@@ -1,5 +1,6 @@
 ﻿using FIAP.Games.Domain.Contracts.IRepositories;
 using FIAP.Games.Infra.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace FIAP.Games.Infra.Repositories
 {

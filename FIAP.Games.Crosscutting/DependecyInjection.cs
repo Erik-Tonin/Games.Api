@@ -1,4 +1,13 @@
-﻿namespace FIAP.Games.Crosscutting
+﻿using FIAP.Games.Application.Contracts.IApplicationService;
+using FIAP.Games.Application.Implementations;
+using FIAP.Games.Domain.Contracts.IRepositories;
+using FIAP.Games.Infra.Context;
+using FIAP.Games.Infra.Repositories;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+
+namespace FIAP.Games.Crosscutting
 {
     public static class DependecyInjection
     {

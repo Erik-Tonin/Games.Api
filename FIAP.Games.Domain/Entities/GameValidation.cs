@@ -1,4 +1,6 @@
-﻿namespace FIAP.Games.Domain.Entities
+﻿using FluentValidation;
+
+namespace FIAP.Games.Domain.Entities
 {
     public class GameValidation : AbstractValidator<Game>
     {

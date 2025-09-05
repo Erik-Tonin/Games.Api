@@ -1,4 +1,6 @@
-﻿namespace FIAP.Games.Domain.Entities
+﻿using FIAP.Games.Domain.Core.Models;
+
+namespace FIAP.Games.Domain.Entities
 {
     public class Category : BaseEntity
     {

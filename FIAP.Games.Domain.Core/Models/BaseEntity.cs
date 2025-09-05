@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using FluentValidation.Results;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FIAP.Games.Domain.Core.Models

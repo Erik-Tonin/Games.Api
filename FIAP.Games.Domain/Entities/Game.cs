@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using FIAP.Games.Domain.Core.Models;
 
 namespace FIAP.Games.Domain.Entities
 {

@@ -1,4 +1,9 @@
-﻿namespace FIAP.Games.Infra.EntityMappers
+﻿using FIAP.Games.Domain.Entities;
+using FIAP.Games.Domain.Statics;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace FIAP.Games.Infra.EntityMappers
 {
     public class CategoryMap : IEntityTypeConfiguration<Category>
     {

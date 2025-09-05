@@ -2,8 +2,7 @@
 
 namespace FIAP.Games.Domain.Contracts.IRepositories
 {
-    public interface IGameRepository : IRepositoryBase<Game>
+    public interface IEventRepository : IRepositoryBase<EventEntity>
     {
-        Task<Game> GetByName(string name);
     }
 }

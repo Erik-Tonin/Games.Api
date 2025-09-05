@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using FIAP.Games.Domain.Entities;
+using System.Text.Json;
 
 namespace FIAP.Games.Presentation.ExceptionMiddleware
 {

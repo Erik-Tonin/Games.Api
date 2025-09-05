@@ -1,4 +1,7 @@
-﻿namespace FIAP.Games.Infra.Context
+﻿using FIAP.Games.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
+
+namespace FIAP.Games.Infra.Context
 {
     public class MicroServiceContext : DbContext
     {
